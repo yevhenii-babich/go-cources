@@ -5,10 +5,6 @@ Welcome to the chi/_examples/rest generated docs.
 <details>
 <summary>`/`</summary>
 
-- [RequestID](/middleware/request_id.go#L67)
-- [Logger](/middleware/logger.go#L41)
-- [Recoverer](/middleware/recoverer.go#L21)
-- [URLFormat](/middleware/url_format.go#L47)
 - [SetContentType.func1](https://github.com/yevhenii-babich/go-cources/rtrpackaged/vendor/github.com/go-chi/render/content_type.go#L49)
 - **/**
   - _GET_
@@ -18,10 +14,6 @@ Welcome to the chi/_examples/rest generated docs.
 <details>
 <summary>`/admin`</summary>
 
-- [RequestID](/middleware/request_id.go#L67)
-- [Logger](/middleware/logger.go#L41)
-- [Recoverer](/middleware/recoverer.go#L21)
-- [URLFormat](/middleware/url_format.go#L47)
 - [SetContentType.func1](https://github.com/yevhenii-babich/go-cources/rtrpackaged/vendor/github.com/go-chi/render/content_type.go#L49)
 - **/admin**
   - [main.AdminOnly](https://github.com/yevhenii-babich/go-cources/rtrpackaged/main.go#L134)
@@ -33,10 +25,6 @@ Welcome to the chi/_examples/rest generated docs.
 <details>
 <summary>`/admin/accounts`</summary>
 
-- [RequestID](/middleware/request_id.go#L67)
-- [Logger](/middleware/logger.go#L41)
-- [Recoverer](/middleware/recoverer.go#L21)
-- [URLFormat](/middleware/url_format.go#L47)
 - [SetContentType.func1](https://github.com/yevhenii-babich/go-cources/rtrpackaged/vendor/github.com/go-chi/render/content_type.go#L49)
 - **/admin**
   - [main.AdminOnly](https://github.com/yevhenii-babich/go-cources/rtrpackaged/main.go#L134)
@@ -48,10 +36,6 @@ Welcome to the chi/_examples/rest generated docs.
 <details>
 <summary>`/admin/users/{userId}`</summary>
 
-- [RequestID](/middleware/request_id.go#L67)
-- [Logger](/middleware/logger.go#L41)
-- [Recoverer](/middleware/recoverer.go#L21)
-- [URLFormat](/middleware/url_format.go#L47)
 - [SetContentType.func1](https://github.com/yevhenii-babich/go-cources/rtrpackaged/vendor/github.com/go-chi/render/content_type.go#L49)
 - **/admin**
   - [main.AdminOnly](https://github.com/yevhenii-babich/go-cources/rtrpackaged/main.go#L134)
@@ -63,10 +47,6 @@ Welcome to the chi/_examples/rest generated docs.
 <details>
 <summary>`/articles`</summary>
 
-- [RequestID](/middleware/request_id.go#L67)
-- [Logger](/middleware/logger.go#L41)
-- [Recoverer](/middleware/recoverer.go#L21)
-- [URLFormat](/middleware/url_format.go#L47)
 - [SetContentType.func1](https://github.com/yevhenii-babich/go-cources/rtrpackaged/vendor/github.com/go-chi/render/content_type.go#L49)
 - **/articles**
   - **/**
@@ -80,10 +60,6 @@ Welcome to the chi/_examples/rest generated docs.
 <details>
 <summary>`/articles/search`</summary>
 
-- [RequestID](/middleware/request_id.go#L67)
-- [Logger](/middleware/logger.go#L41)
-- [Recoverer](/middleware/recoverer.go#L21)
-- [URLFormat](/middleware/url_format.go#L47)
 - [SetContentType.func1](https://github.com/yevhenii-babich/go-cources/rtrpackaged/vendor/github.com/go-chi/render/content_type.go#L49)
 - **/articles**
   - **/search**
@@ -94,10 +70,6 @@ Welcome to the chi/_examples/rest generated docs.
 <details>
 <summary>`/articles/{articleID}`</summary>
 
-- [RequestID](/middleware/request_id.go#L67)
-- [Logger](/middleware/logger.go#L41)
-- [Recoverer](/middleware/recoverer.go#L21)
-- [URLFormat](/middleware/url_format.go#L47)
 - [SetContentType.func1](https://github.com/yevhenii-babich/go-cources/rtrpackaged/vendor/github.com/go-chi/render/content_type.go#L49)
 - **/articles**
   - **/{articleID}**
@@ -114,10 +86,6 @@ Welcome to the chi/_examples/rest generated docs.
 <details>
 <summary>`/articles/{articleSlug:[a-z-]+}`</summary>
 
-- [RequestID](/middleware/request_id.go#L67)
-- [Logger](/middleware/logger.go#L41)
-- [Recoverer](/middleware/recoverer.go#L21)
-- [URLFormat](/middleware/url_format.go#L47)
 - [SetContentType.func1](https://github.com/yevhenii-babich/go-cources/rtrpackaged/vendor/github.com/go-chi/render/content_type.go#L49)
 - **/articles**
   - **/{articleSlug:[a-z-]+}**
@@ -129,10 +97,6 @@ Welcome to the chi/_examples/rest generated docs.
 <details>
 <summary>`/panic`</summary>
 
-- [RequestID](/middleware/request_id.go#L67)
-- [Logger](/middleware/logger.go#L41)
-- [Recoverer](/middleware/recoverer.go#L21)
-- [URLFormat](/middleware/url_format.go#L47)
 - [SetContentType.func1](https://github.com/yevhenii-babich/go-cources/rtrpackaged/vendor/github.com/go-chi/render/content_type.go#L49)
 - **/panic**
   - _GET_
@@ -142,10 +106,6 @@ Welcome to the chi/_examples/rest generated docs.
 <details>
 <summary>`/ping`</summary>
 
-- [RequestID](/middleware/request_id.go#L67)
-- [Logger](/middleware/logger.go#L41)
-- [Recoverer](/middleware/recoverer.go#L21)
-- [URLFormat](/middleware/url_format.go#L47)
 - [SetContentType.func1](https://github.com/yevhenii-babich/go-cources/rtrpackaged/vendor/github.com/go-chi/render/content_type.go#L49)
 - **/ping**
   - _GET_

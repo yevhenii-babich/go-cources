@@ -1,0 +1,33 @@
+GET localhost:3333/ping
+
+###
+GET localhost:3333/panic
+###
+
+POST localhost:3333/articles
+Content-Type: application/json
+Accept: application/json
+
+{"title":"GO rules"}
+
+
+###
+GET localhost:3333/articles/1
+
+###
+GET localhost:3333/articles/91
+
+###
+
+GET localhost:3333/
+
+###
+PUT localhost:3333/articles/91
+Content-Type: application/json
+Accept: application/json
+
+{"title":"GO rules"}
+
+###
+GET localhost:3333/articles/search
+###

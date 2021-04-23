@@ -12,7 +12,7 @@ Accept: application/json
 
 
 ###
-GET localhost:3333/articles/1
+GET localhost:3333/articles/10
 
 ###
 GET localhost:3333/articles/91

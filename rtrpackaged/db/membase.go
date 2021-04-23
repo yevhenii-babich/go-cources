@@ -3,8 +3,9 @@ package db
 import (
 	"errors"
 	"fmt"
-	"github.com/yevhenii-babich/go-cources/rtrpackaged/models"
 	"math/rand"
+
+	"github.com/yevhenii-babich/go-cources/rtrpackaged/models"
 )
 
 // Article fixture data
@@ -25,6 +26,7 @@ var users = []*models.User{
 func List() []*models.Article {
 	return articles
 }
+
 func NewArticle(article *models.Article) (string, error) {
 	article.ID = fmt.Sprintf("%d", rand.Intn(100)+10)
 	articles = append(articles, article)

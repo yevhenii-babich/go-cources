@@ -2,18 +2,17 @@ package main
 
 import (
 	"fmt"
-
 	"time"
 
 	"github.com/nats-io/nats.go"
 	"github.com/sirupsen/logrus"
 )
 
-//var nc *nats.Conn
+// var nc *nats.Conn
 
 func main() {
-	//nc, _ = nats.Connect(nats.DefaultURL)
-	//defer nc.Close()
+	// nc, _ = nats.Connect(nats.DefaultURL)
+	// defer nc.Close()
 	go subChan()
 	go subFunc()
 
@@ -25,18 +24,21 @@ func pub() {
 	var i int64
 	for {
 		i++
-		nc.Publish("foo", []byte(fmt.Sprintf("Hi! This is # %d", i)))
+		if err := nc.Publish("foo", []byte(fmt.Sprintf("Hi! This is # %d", i))); err != nil {
+			logrus.Errorf("publish error: %v", err)
+		}
 		time.Sleep(time.Second)
 	}
 }
 
 func subFunc() {
 	nc, _ := nats.Connect(nats.DefaultURL)
-	nc.Subscribe("foo", func(m *nats.Msg) {
+	_, _ = nc.Subscribe("foo", func(m *nats.Msg) {
 		logrus.WithField("t", "func").Info(string(m.Data))
-		//nc.Publish(m.Reply, []byte("I can help!"))
+		// nc.Publish(m.Reply, []byte("I can help!"))
 	})
 }
+
 func subChan() {
 	nc, _ := nats.Connect(nats.DefaultURL)
 	ch := make(chan *nats.Msg, 64)

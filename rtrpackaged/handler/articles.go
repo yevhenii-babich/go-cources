@@ -22,7 +22,9 @@ func ListArticles(w http.ResponseWriter, r *http.Request) {
 // SearchArticles searches the Articles data for a matching article.
 // It's just a stub, but you get the idea.
 func SearchArticles(w http.ResponseWriter, r *http.Request) {
-	_ = render.RenderList(w, r, NewArticleListResponse(db.List()))
+	list := db.List()
+	list[0].ID = "10"
+	_ = render.RenderList(w, r, NewArticleListResponse(list))
 }
 
 // CreateArticle persists the posted Article and returns it
@@ -86,6 +88,7 @@ func DeleteArticle(w http.ResponseWriter, r *http.Request) {
 	article := r.Context().Value("article").(*models.Article)
 
 	article, err = db.RemoveArticle(article.ID)
+
 	if err != nil {
 		_ = render.Render(w, r, mw.ErrInvalidRequest(err))
 		return

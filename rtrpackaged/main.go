@@ -49,13 +49,14 @@ import (
 	"github.com/go-chi/render"
 	"github.com/yevhenii-babich/go-cources/rtrpackaged/handler"
 	"github.com/yevhenii-babich/go-cources/rtrpackaged/mw"
+	"github.com/yevhenii-babich/go-cources/rtrpackaged/some"
 )
 
-var routes = flag.Bool("routes", true, "Generate router documentation")
+var routes = flag.Bool("routes", false, "Generate router documentation")
 
 func main() {
 	flag.Parse()
-
+	some.NewMain().Get()
 	r := chi.NewRouter()
 
 	r.Use(middleware.RequestID)

@@ -111,10 +111,7 @@ func main() {
 		if err != nil {
 			log.Fatal(err)
 		}
-
 		bus.register <- ws
-
 	})
-
-	http.ListenAndServe(":8081", nil)
+	_ = http.ListenAndServe(":8081", nil)
 }

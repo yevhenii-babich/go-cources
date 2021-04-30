@@ -1,0 +1,721 @@
+---
+swagger: "2.0"
+info:
+  description: "Base for other projects"
+  version: "0.1"
+  title: "Scaffold Servise"
+host: "localhost:8080"
+basePath: "/dev"
+schemes:
+- "http"
+consumes:
+- "application/json"
+produces:
+- "application/json"
+security:
+- User: []
+- Jwt: []
+paths:
+  /status:
+    get:
+      tags:
+      - "Health-Check"
+      summary: "Get status"
+      description: "Returns info about service"
+      parameters: []
+      responses:
+        "200":
+          description: "Service info"
+          schema:
+            $ref: "#/definitions/Health"
+  /{mId}/buzz:
+    get:
+      tags:
+      - "Buzz"
+      summary: "Returns all records from database"
+      parameters:
+      - name: "mId"
+        in: "path"
+        description: "Param for middleware"
+        required: true
+        type: "string"
+        x-exportParamName: "MId"
+      - name: "order"
+        in: "query"
+        description: "Sorting order of records"
+        required: false
+        type: "string"
+        default: "asc"
+        enum:
+        - "asc"
+        - "desc"
+        x-exportParamName: "Order"
+        x-optionalDataType: "String"
+      - name: "page"
+        in: "query"
+        description: "Page number"
+        required: false
+        type: "number"
+        default: 1
+
+        x-exportParamName: "Page"
+        x-optionalDataType: "Float32"
+      - name: "pageSize"
+        in: "query"
+        description: "Number of records on one page"
+        required: false
+        type: "number"
+        default: 20
+
+        x-exportParamName: "PageSize"
+        x-optionalDataType: "Float32"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/PaginationParam"
+        "400":
+          description: "Autorization header invalid or bad param for middleware"
+          examples:
+            no_token:
+              errcode: 400
+              errmsg: "JWT Header must not bee empty"
+            token_is_invalid:
+              errcode: 400
+              errmsg: "JWT Header is invalid json"
+            bad_param:
+              errcode: 400
+              errmsg: "Wrong param"
+        "404":
+          description: "Can't found resource"
+          examples:
+            bad_body:
+              errcode: 404
+              message: "Not Found"
+    post:
+      tags:
+      - "Buzz"
+      summary: "Add new buzz record in db"
+      parameters:
+      - name: "mId"
+        in: "path"
+        description: "Param for middleware"
+        required: true
+        type: "string"
+        x-exportParamName: "MId"
+      - in: "body"
+        name: "json"
+        description: "Buzz object that needs to be added to the database"
+        required: false
+        schema:
+          $ref: "#/definitions/Buzz"
+        x-exportParamName: "Json"
+      responses:
+        "201":
+          description: "Record was successfully added"
+          schema:
+            $ref: "#/definitions/Buzz"
+        "400":
+          description: "Autorization header invalid or bad param for middleware"
+          examples:
+            no_token:
+              errcode: 400
+              errmsg: "JWT Header must not bee empty"
+            token_is_invalid:
+              errcode: 400
+              errmsg: "JWT Header is invalid json"
+            bad_param:
+              errcode: 400
+              errmsg: "Wrong param"
+        "404":
+          description: "Can't found resource"
+          examples:
+            bad_body:
+              errcode: 404
+              message: "Not Found"
+  /{mId}/buzz/{Id}:
+    get:
+      tags:
+      - "Buzz"
+      summary: "Returns buzz record with given id"
+      parameters:
+      - name: "mId"
+        in: "path"
+        description: "Param for middleware"
+        required: true
+        type: "string"
+        x-exportParamName: "MId"
+      - name: "Id"
+        in: "path"
+        description: "id"
+        required: true
+        type: "number"
+
+        x-exportParamName: "Id"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/PaginationParam"
+        "400":
+          description: "Autorization header invalid or bad param for middleware"
+          examples:
+            no_token:
+              errcode: 400
+              errmsg: "JWT Header must not bee empty"
+            token_is_invalid:
+              errcode: 400
+              errmsg: "JWT Header is invalid json"
+            bad_param:
+              errcode: 400
+              errmsg: "Wrong param"
+        "404":
+          description: "Can't found resource"
+          examples:
+            bad_body:
+              errcode: 404
+              message: "Not Found"
+    put:
+      tags:
+      - "Buzz"
+      summary: "Update record in database with given id"
+      parameters:
+      - name: "mId"
+        in: "path"
+        description: "Param for middleware"
+        required: true
+        type: "string"
+        x-exportParamName: "MId"
+      - name: "Id"
+        in: "path"
+        description: "id"
+        required: true
+        type: "number"
+
+        x-exportParamName: "Id"
+      - in: "body"
+        name: "json"
+        description: "Buzz object for updating existing records in database"
+        required: false
+        schema:
+          $ref: "#/definitions/Buzz"
+        x-exportParamName: "Json"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            properties:
+              description:
+                type: "string"
+                example: "new description"
+        "400":
+          description: "Autorization header invalid or bad param for middleware"
+          examples:
+            no_token:
+              errcode: 400
+              errmsg: "JWT Header must not bee empty"
+            token_is_invalid:
+              errcode: 400
+              errmsg: "JWT Header is invalid json"
+            bad_param:
+              errcode: 400
+              errmsg: "Wrong param"
+        "404":
+          description: "Can't found resource"
+          examples:
+            bad_body:
+              errcode: 404
+              message: "Not Found"
+    delete:
+      tags:
+      - "Buzz"
+      summary: "Delete record from database with given id"
+      parameters:
+      - name: "mId"
+        in: "path"
+        description: "Param for middleware"
+        required: true
+        type: "string"
+        x-exportParamName: "MId"
+      - name: "Id"
+        in: "path"
+        description: "id"
+        required: true
+        type: "number"
+
+        x-exportParamName: "Id"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "string"
+            example: "success"
+        "400":
+          description: "Autorization header invalid or bad param for middleware"
+          examples:
+            no_token:
+              errcode: 400
+              errmsg: "JWT Header must not bee empty"
+            token_is_invalid:
+              errcode: 400
+              errmsg: "JWT Header is invalid json"
+            bad_param:
+              errcode: 400
+              errmsg: "Wrong param"
+        "404":
+          description: "Can't found resource"
+          examples:
+            bad_body:
+              errcode: 404
+              message: "Not Found"
+  /couch:
+    get:
+      tags:
+      - "CouchDB"
+      summary: "Returns all records from couchDB database"
+      parameters:
+      - name: "order"
+        in: "query"
+        description: "Sorting order of records"
+        required: false
+        type: "string"
+        default: "asc"
+        enum:
+        - "asc"
+        - "desc"
+        x-exportParamName: "Order"
+        x-optionalDataType: "String"
+      - name: "page"
+        in: "query"
+        description: "Page number"
+        required: false
+        type: "number"
+        default: 1
+
+        x-exportParamName: "Page"
+        x-optionalDataType: "Float32"
+      - name: "pageSize"
+        in: "query"
+        description: "Number of records on one page"
+        required: false
+        type: "number"
+        default: 20
+
+        x-exportParamName: "PageSize"
+        x-optionalDataType: "Float32"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/PaginationParamCouch"
+        "400":
+          description: "Autorization header invalid"
+          examples:
+            no_token:
+              errcode: 400
+              errmsg: "JWT Header must not bee empty"
+            token_is_invalid:
+              errcode: 400
+              errmsg: "JWT Header is invalid json"
+        "404":
+          description: "Can't found resource"
+          examples:
+            bad_body:
+              errcode: 404
+              message: "Not Found"
+    post:
+      tags:
+      - "CouchDB"
+      summary: "Add new document in couchDB"
+      parameters:
+      - in: "body"
+        name: "json"
+        description: "Document that needs to be added to the couchDB"
+        required: false
+        schema:
+          $ref: "#/definitions/Couch"
+        x-exportParamName: "Json"
+      responses:
+        "201":
+          description: "Document was successfully added"
+          schema:
+            $ref: "#/definitions/Couch"
+        "400":
+          description: "Autorization header invalid"
+          examples:
+            no_token:
+              errcode: 400
+              errmsg: "JWT Header must not bee empty"
+            token_is_invalid:
+              errcode: 400
+              errmsg: "JWT Header is invalid json"
+        "404":
+          description: "Can't found resource"
+          examples:
+            bad_body:
+              errcode: 404
+              message: "Not Found"
+  /couch/{Id}:
+    get:
+      tags:
+      - "CouchDB"
+      summary: "Returns document with given id"
+      parameters:
+      - name: "Id"
+        in: "path"
+        description: "id"
+        required: true
+        type: "number"
+
+        x-exportParamName: "Id"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Couch"
+        "400":
+          description: "Autorization header invalid"
+          examples:
+            no_token:
+              errcode: 400
+              errmsg: "JWT Header must not bee empty"
+            token_is_invalid:
+              errcode: 400
+              errmsg: "JWT Header is invalid json"
+        "404":
+          description: "Can't found resource"
+          examples:
+            bad_body:
+              errcode: 404
+              message: "Not Found"
+    put:
+      tags:
+      - "CouchDB"
+      summary: "Update document in couchDB with given id"
+      parameters:
+      - name: "Id"
+        in: "path"
+        description: "id"
+        required: true
+        type: "number"
+
+        x-exportParamName: "Id"
+      - in: "body"
+        name: "json"
+        description: "Document for updating existing records in couchDB"
+        required: false
+        schema:
+          $ref: "#/definitions/CouchPUT"
+        x-exportParamName: "Json"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "string"
+            example: "Document was updated successful"
+        "400":
+          description: "Autorization header invalid"
+          examples:
+            no_token:
+              errcode: 400
+              errmsg: "JWT Header must not bee empty"
+            token_is_invalid:
+              errcode: 400
+              errmsg: "JWT Header is invalid json"
+        "404":
+          description: "Can't found resource"
+          examples:
+            bad_body:
+              errcode: 404
+              message: "Not Found"
+    delete:
+      tags:
+      - "CouchDB"
+      summary: "Delete document from couchDB with given id"
+      parameters:
+      - name: "Id"
+        in: "path"
+        description: "id"
+        required: true
+        type: "number"
+
+        x-exportParamName: "Id"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "string"
+            example: "Document was successfully deleted"
+        "400":
+          description: "Autorization header invalid"
+          examples:
+            no_token:
+              errcode: 400
+              errmsg: "JWT Header must not bee empty"
+            token_is_invalid:
+              errcode: 400
+              errmsg: "JWT Header is invalid json"
+        "404":
+          description: "Can't found resource"
+          examples:
+            bad_body:
+              errcode: 404
+              message: "Not Found"
+securityDefinitions:
+  Jwt:
+    description: "{\\\\\"jti\\\\\":\\\\\"1\\\\\"} - use it without proxy; When using\
+      \ curl escape double quotes"
+    type: "apiKey"
+    name: "Jwt"
+    in: "header"
+  User:
+    description: "Get from POST:{USER-API}/login/ OR POST:{USER-API}/auth/ OR POST:{USER-API}/verify/password/"
+    type: "apiKey"
+    name: "Authorization"
+    in: "header"
+definitions:
+  Health:
+    properties:
+      app:
+        type: "string"
+        description: "app name"
+      version:
+        type: "string"
+        description: "app version"
+      tag:
+        type: "string"
+        description: "app tag"
+      build:
+        type: "string"
+        description: "app build"
+    example:
+      app: "app"
+      build: "build"
+      tag: "tag"
+      version: "version"
+  Buzz:
+    properties:
+      name:
+        type: "string"
+        example: "test"
+      buzzType:
+        type: "string"
+        example: "testA"
+      description:
+        type: "string"
+        example: "test object"
+    example:
+      buzzType: "testA"
+      name: "test"
+      description: "test object"
+  Couch:
+    properties:
+      id:
+        type: "integer"
+
+        example: 1
+      firstName:
+        type: "string"
+        example: "Firs name example"
+      secondName:
+        type: "string"
+        example: "Second name example"
+    example:
+      firstName: "Firs name example"
+      id: 1
+      secondName: "Second name example"
+  CouchPUT:
+    properties:
+      firstName:
+        type: "string"
+        example: "Firs name example"
+      secondName:
+        type: "string"
+        example: "Second name example"
+  ReturnedJSON:
+    properties:
+      id:
+        type: "integer"
+
+        example: 1
+      name:
+        type: "string"
+        example: "test"
+      buzzType:
+        type: "string"
+        example: "testA"
+      description:
+        type: "string"
+        example: "test object"
+      details:
+        type: "object"
+        example: {}
+        properties: {}
+      createdAt:
+        type: "integer"
+        format: "int"
+        example: 0
+      updatedAt:
+        type: "integer"
+        format: "int"
+        example: 0
+    example:
+      createdAt: 0
+      buzzType: "testA"
+      name: "test"
+      description: "test object"
+      details: {}
+      id: 1
+      updatedAt: 0
+  PaginationParam:
+    properties:
+      page:
+        type: "integer"
+
+        example: 1
+      pageSize:
+        type: "integer"
+
+        example: 10
+      order:
+        type: "string"
+        example: "asc"
+      total:
+        type: "integer"
+
+        example: 10
+      records:
+        type: "array"
+        items:
+          $ref: "#/definitions/ReturnedJSON"
+    example:
+      total: 10
+      records:
+      - createdAt: 0
+        buzzType: "testA"
+        name: "test"
+        description: "test object"
+        details: {}
+        id: 1
+        updatedAt: 0
+      - createdAt: 0
+        buzzType: "testA"
+        name: "test"
+        description: "test object"
+        details: {}
+        id: 1
+        updatedAt: 0
+      pageSize: 10
+      page: 1
+      order: "asc"
+  PaginationParamCouch:
+    properties:
+      page:
+        type: "integer"
+
+        example: 1
+      pageSize:
+        type: "integer"
+
+        example: 10
+      order:
+        type: "string"
+        example: "asc"
+      total:
+        type: "integer"
+
+        example: 10
+      records:
+        type: "array"
+        items:
+          $ref: "#/definitions/Couch"
+    example:
+      total: 10
+      records:
+      - firstName: "Firs name example"
+        id: 1
+        secondName: "Second name example"
+      - firstName: "Firs name example"
+        id: 1
+        secondName: "Second name example"
+      pageSize: 10
+      page: 1
+      order: "asc"
+parameters:
+  MID:
+    name: "mId"
+    in: "path"
+    description: "Param for middleware"
+    required: true
+    type: "string"
+    x-exportParamName: "MId"
+  ID:
+    name: "Id"
+    in: "path"
+    description: "id"
+    required: true
+    type: "number"
+
+    x-exportParamName: "Id"
+  Page:
+    name: "page"
+    in: "query"
+    description: "Page number"
+    required: false
+    type: "number"
+    default: 1
+
+    x-exportParamName: "Page"
+    x-optionalDataType: "Float32"
+  Order:
+    name: "order"
+    in: "query"
+    description: "Sorting order of records"
+    required: false
+    type: "string"
+    default: "asc"
+    enum:
+    - "asc"
+    - "desc"
+    x-exportParamName: "Order"
+    x-optionalDataType: "String"
+  PageSize:
+    name: "pageSize"
+    in: "query"
+    description: "Number of records on one page"
+    required: false
+    type: "number"
+    default: 20
+
+    x-exportParamName: "PageSize"
+    x-optionalDataType: "Float32"
+responses:
+  JWTError:
+    description: "Autorization header invalid"
+    examples:
+      no_token:
+        errcode: 400
+        errmsg: "JWT Header must not bee empty"
+      token_is_invalid:
+        errcode: 400
+        errmsg: "JWT Header is invalid json"
+  UnauthorizedError:
+    description: "Autorization header invalid or bad param for middleware"
+    examples:
+      no_token:
+        errcode: 400
+        errmsg: "JWT Header must not bee empty"
+      token_is_invalid:
+        errcode: 400
+        errmsg: "JWT Header is invalid json"
+      bad_param:
+        errcode: 400
+        errmsg: "Wrong param"
+  NotFoundError:
+    description: "Can't found resource"
+    examples:
+      bad_body:
+        errcode: 404
+        message: "Not Found"

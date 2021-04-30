@@ -1,3 +1,3 @@
-module github.com/yevhenii-babich/go-cources/json_api
+module jsonapi
 
 go 1.16
